@@ -1,0 +1,8 @@
+ipython
+tqdm
+sqlalchemy
+fiona
+flask
+datetime
+numpy
+uuid
