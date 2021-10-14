@@ -1,8 +1,7 @@
-ipython
-tqdm
-sqlalchemy
-fiona
-flask
-datetime
-numpy
-uuid
+connexion == 2.6.0
+python_dateutil == 2.6.0
+setuptools >= 21.0.0
+xmltodict~=0.12.0
+Flask~=2.0.2
+six~=1.16.0
+requests~=2.26.0

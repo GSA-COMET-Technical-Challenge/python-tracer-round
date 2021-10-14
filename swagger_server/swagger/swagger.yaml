@@ -1,0 +1,106 @@
+openapi: 3.0.0
+info:
+  title: MyTSA Tech Challenge API
+  description: This is a MyTSA API interface design / specification
+  license:
+    name: MyTSA Tech Challenge API
+  version: 0.0.1
+servers:
+- url: https://localhost:8080/
+- url: https://localhost:8080/
+paths:
+  /airports:
+    get:
+      tags:
+      - get all airports data
+      summary: Gets all the airports data
+      operationId: get_airports
+      responses:
+        "200":
+          description: OK
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AllAirports'
+        "400":
+          description: Bad Request
+        "401":
+          description: Unauthorized
+        "404":
+          description: Not Found
+        "405":
+          description: Method Not Allowed
+        "415":
+          description: Unsupported Media Type / Unspecified Content Type
+        "500":
+          description: Internal Server Error
+        "504":
+          description: Gateway timeout
+      x-openapi-router-controller: swagger_server.controllers.get_all_airports_data_controller
+components:
+  schemas:
+    AllAirports:
+      type: array
+      items:
+        $ref: '#/components/schemas/AirportModel'
+    AirportModel:
+      type: object
+      properties:
+        airport:
+          type: string
+          example: Huntsville International
+        shortcode:
+          type: string
+          example: HSV
+        city:
+          type: string
+          example: Huntsville
+        state:
+          type: string
+          example: AL
+        latitude:
+          type: integer
+        longitude:
+          type: integer
+        utc:
+          type: integer
+          example: -6
+        dst:
+          type: boolean
+          example: true
+        precheck:
+          type: boolean
+          example: true
+        checkpoint:
+          $ref: '#/components/schemas/AirportModel_checkpoint'
+      example:
+        checkpoint:
+          longname: MOB-A
+          id: 1
+          shortname: MOB-A
+        precheck: true
+        dst: true
+        city: Huntsville
+        utc: -6
+        latitude: 0
+        state: AL
+        shortcode: HSV
+        airport: Huntsville International
+        longitude: 6
+    AirportModel_checkpoint:
+      type: object
+      properties:
+        id:
+          type: integer
+          example: 1
+        longname:
+          type: string
+          example: MOB-A
+        shortname:
+          type: string
+          example: MOB-A
+      example:
+        longname: MOB-A
+        id: 1
+        shortname: MOB-A
+

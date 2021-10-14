@@ -1,11 +1,16 @@
-FROM python:3.8.7-buster
+FROM python:3.6-alpine
 
-WORKDIR /app
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
 
-ADD . /app
+COPY requirements.txt /usr/src/app/
 
-RUN pip install -r requirements.txt
+RUN pip3 install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT [ "python" ]
+COPY . /usr/src/app
 
-CMD [ "app.py" ]
+EXPOSE 8080
+
+ENTRYPOINT ["python3"]
+
+CMD ["-m", "swagger_server"]
